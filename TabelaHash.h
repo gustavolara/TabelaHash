@@ -4,9 +4,8 @@ typedef struct tabelaHash
     int M;
 } tabelaHash;
 
-
 int insereTabela(tabelaHash *tabela, int key, char dado);
+void criaTabela(tabelaHash *tabela);
 int chave(int dado, int M);
 void mostraTabela(tabelaHash *tabela);
-void criaTabela(tabelaHash *tabela);
 int buscaElemento(tabelaHash *tabela, char dado);

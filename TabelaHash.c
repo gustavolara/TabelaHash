@@ -5,22 +5,24 @@
 #include <string.h>
 #include "TabelaHash.h"
 
-int volta=0;
+int volta = 0;
 int insereTabela(tabelaHash *tabela, int key, char dado)
 {
     if (tabela->hash[key] == NULL)
     {
         tabela->hash[key] = dado;
-        volta=0;
+        volta = 0;
         return 1;
     }
     else
     {
-        if (volta == tabela->M) {
-            volta=0;
+        if (volta == tabela->M)
+        {
+            volta = 0;
             return 0;
         }
-        else {
+        else
+        {
             volta++;
             key = chave(dado + volta, tabela->M);
             insereTabela(tabela, key, dado);
@@ -28,11 +30,13 @@ int insereTabela(tabelaHash *tabela, int key, char dado)
     }
 }
 
-void criaTabela(tabelaHash *tabela){
+void criaTabela(tabelaHash *tabela)
+{
     int i;
-    for(i=0;i<tabela->M;i++){
-        if(tabela->hash[i]!=NULL)
-            tabela->hash[i]=NULL;
+    for (i = 0; i < tabela->M; i++)
+    {
+        if (tabela->hash[i] != NULL)
+            tabela->hash[i] = NULL;
     }
 }
 
@@ -66,22 +70,26 @@ void mostraTabela(tabelaHash *tabela)
     printf("==========================\n");
 }
 
-int buscaElemento(tabelaHash *tabela, char dado) {
+int buscaElemento(tabelaHash *tabela, char dado)
+{
     int key;
-
     key = chave(dado + volta, tabela->M);
-
-    if (tabela->hash[key] == NULL) {
-        volta=0;
+    if (tabela->hash[key] == NULL)
+    {
+        volta = 0;
         return -1;
-    } else {
-        if(tabela->hash[key] == dado) {
-            volta=0;
+    }
+    else
+    {
+        if (tabela->hash[key] == dado)
+        {
+            volta = 0;
             return key;
-        } else {
+        }
+        else
+        {
             volta++;
             buscaElemento(tabela, dado);
         }
-
     }
 }
