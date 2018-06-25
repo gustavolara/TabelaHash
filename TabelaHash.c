@@ -8,12 +8,10 @@
 int volta=0;
 int insereTabela(tabelaHash *tabela, int key, char dado)
 {
-    printf("Tentando inserir dado %c inserido na posicao %i\n", dado, key);
     if (tabela->hash[key] == NULL)
     {
         tabela->hash[key] = dado;
         volta=0;
-        printf("Dado %c inserido na posicao %i\n", dado, key);
         return 1;
     }
     else
@@ -23,7 +21,6 @@ int insereTabela(tabelaHash *tabela, int key, char dado)
         }
         else {
             volta++;
-            printf("volta = %i\n", volta);
             key = chave(dado + volta, tabela->M);
             insereTabela(tabela, key, dado);
         }
@@ -57,13 +54,31 @@ void mostraTabela(tabelaHash *tabela)
     {
         if (tabela->hash[i] != NULL)
         {
-            printf("%c",tabela->hash[i]);
+            printf("Posição %.2i |  valor = %c", i, tabela->hash[i]);
             printf("\n");
         }
         else
         {
-            printf("<vazio>\n");
+            printf("Posição %.2i | <vazio>\n", i);
         }
     }
     printf("==========================\n");
+}
+
+int buscaElemento(tabelaHash *tabela, char dado) {
+    int key;
+
+    key = chave(dado + volta, tabela->M);
+
+    if (tabela->hash[key] == NULL) {
+        return -1;
+    } else {
+        if(tabela->hash[key] == dado) {
+            return key;
+        } else {
+            volta++;
+            buscaElemento(tabela, dado);
+        }
+
+    }
 }
