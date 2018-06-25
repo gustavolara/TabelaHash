@@ -5,21 +5,29 @@
 #include <string.h>
 #include "TabelaHash.h"
 
-int volta;
+int volta=0;
 int insereTabela(tabelaHash *tabela, int key, char dado)
 {
+    printf("Tentando inserir dado %c inserido na posicao %i\n", dado, key);
     if (tabela->hash[key] == NULL)
     {
         tabela->hash[key] = dado;
+        volta=0;
+        printf("Dado %c inserido na posicao %i\n", dado, key);
         return 1;
     }
     else
     {
-        if (volta == tabela->M)
+        if (volta == tabela->M) {
             return 0;
-        key = chave(dado + 1, tabela->M);
-        insereTabela(tabela, key, dado);
-        volta++;
+        }
+        else {
+            volta++;
+            printf("volta = %i\n", volta);
+            key = chave(dado + volta, tabela->M);
+            insereTabela(tabela, key, dado);
+            return 1;
+        }
     }
 }
 
