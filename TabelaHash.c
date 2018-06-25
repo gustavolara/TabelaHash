@@ -26,7 +26,6 @@ int insereTabela(tabelaHash *tabela, int key, char dado)
             printf("volta = %i\n", volta);
             key = chave(dado + volta, tabela->M);
             insereTabela(tabela, key, dado);
-            return 1;
         }
     }
 }
