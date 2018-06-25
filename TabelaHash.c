@@ -17,6 +17,7 @@ int insereTabela(tabelaHash *tabela, int key, char dado)
     else
     {
         if (volta == tabela->M) {
+            volta=0;
             return 0;
         }
         else {
@@ -71,9 +72,11 @@ int buscaElemento(tabelaHash *tabela, char dado) {
     key = chave(dado + volta, tabela->M);
 
     if (tabela->hash[key] == NULL) {
+        volta=0;
         return -1;
     } else {
         if(tabela->hash[key] == dado) {
+            volta=0;
             return key;
         } else {
             volta++;
